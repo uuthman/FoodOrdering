@@ -1,0 +1,23 @@
+#side-bar .list-group a {
+    text-decoration: none;
+}
+
+ #side-bar .list-group a:hover, #side-bar .list-group a:active {
+    color: rgb(85, 89, 90) !important;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    #side-bar .account-setting{
+        margin-bottom: 30px;
+    }
+
+    #main-header p{
+        font-size: 35px;
+        margin-top: 30px;
+    }
+}

@@ -1,0 +1,91 @@
+body {
+  background: #333;
+  color: #fff;
+}
+
+.navbar {
+  border-bottom: #008ed6 3px solid;
+  opacity: 0.8;
+}
+
+#home-section {
+  background: url(../img/index.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 700px;
+}
+
+#home-section .dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 700px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#home-section .home-inner {
+  padding-top: 150px;
+}
+
+#home-section .card-form {
+  opacity: 0.8;
+  height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#home-section .fas,
+#create-section .fas {
+  color: #008ed6;
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#explore-section .fas,
+#share-section .fas {
+  background: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+#gallery{
+    opacity: 1;
+}
+
+ #express-footer .express-list p a, #express-footer .express-list-2 p a{
+  text-decoration: none;
+  color: #fff;
+}
+
+  p a:visited {
+    color: #E8F7FC !important;
+}
+
+ p a:hover, p a:active {
+    color: #C1C7C9 !important;
+}
+
+.services{
+  background: url(../img/food-and-drink.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 400px;
+}
+
+.services .overlay{
+  position: absolute;
+  width: 100%;
+  min-height: 400px;
+  background: rgba(227, 234, 242, 0.7)
+}
+
+.services .mid {
+  padding-top: 150px;
+}
+
