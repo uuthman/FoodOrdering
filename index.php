@@ -197,9 +197,9 @@
                     <p>
                         <i class="fa fa-envelope mr-3"></i> info@expressOrder.com</p>
                     <p>
-                        <i class="fa fa-phone mr-3"></i> 09036473844</p>
-                    <p>
-                        <i class="fa fa-print mr-3"></i> 0938984844</p>
+                        <i class="fa fa-phone mr-3"></i>08162644883</p>
+                    
+                       
                 </div>
             </div>
             <hr>
