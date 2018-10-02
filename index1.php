@@ -16,9 +16,7 @@ if(isset($_SESSION["uid"])){
         crossorigin="anonymous">
 		<script src="js/jquery2.js"></script>
 		<script src="main.js"></script>
-		<style>
-			
-		</style>
+		
 	</head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -41,7 +39,7 @@ if(isset($_SESSION["uid"])){
 			</ul>
 			
 			
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav navbar-right">
                         <li class="nav-item mr-3">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#cart_container">
                                 <i class="fas fa-cart-plus"></i> Cart<span class="badge bg-primary">0</span>
@@ -102,15 +100,13 @@ if(isset($_SESSION["uid"])){
 			</div>
 			<div class="col-md-9">	
 				<div class="row">
-					<div class="col-md-12 col-xs-12" id="product_msg">
-					</div>
+				<!----	<div class="col-md-12 col-xs-12" id="product_msg">
+					</div> -->
 				</div>
 				<div class="card" id="scroll">
 					<div class="card-header">Products</div>
 					<div class="card-body">
-						<div id="get_product">
-							<!--Here we get product jquery Ajax Request-->
-						</div>
+							<?php include "cat.php"; ?>
 						<!--<div class="col-md-4">
 							<div class="panel panel-info">
 								<div class="panel-heading">Samsung Galaxy</div>
@@ -128,10 +124,12 @@ if(isset($_SESSION["uid"])){
 			</div>	
 		</div>
 		<div class="row">
-			<div class="col-md-12">
+		<div class="col-md-4">
+		</div>
+			<div class="col-md-8">
 				
 					<ul class="pagination" id="pageno">
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item bg-primary"><a class="page-link" href="#">1</a></li>
 					</ul>
 				
 			</div>

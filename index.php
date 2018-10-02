@@ -21,15 +21,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item mr-3">
                     <a href="login_form.php">
                         <button class="btn btn-primary" ><i class="fas fa-user"></i>
                         login
                     </button>
                     </a>
                     </li>
-
-                    <li class="nav-item ml-4">
+                    
+                    <li class="nav-item">
                     <a href="customer_registration.php">
                         <button class="btn btn-primary" ><i class="fas fa-user"></i>
                         Signup
@@ -83,17 +83,17 @@
                 <div class="col-md-4 mb-4 text-center">
                     <i class="fas fa-mouse-pointer fa-3x mb-2 "></i>
                     <h3>Select Your Food</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, veniam.</p>
+                    <p class="lead">Browse through the available</p>
                 </div>
                 <div class="col-md-4 mb-4 text-center">
                     <i class="fas fa-home fa-3x mb-2"></i>
                     <h3>Recieve your food at home</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, veniam.</p>
+                    <p class="lead"> Your order will be delivered on time </p>
                 </div>
                 <div class="col-md-4 mb-4 text-center">
                     <i class="fas fa-heart fa-3x mb-2"></i>
                     <h3>Enjoy Your Meal</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, veniam.</p>
+                    <p class="lead">Have a very good day</p>
                 </div>
             </div>
         </div>

@@ -112,7 +112,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
           <p class="lead text-center">
             Copyright &copy;
             <span id="year"></span>
-            Blogen
+            ExpressOrder
           </p>
         </div>
       </div>

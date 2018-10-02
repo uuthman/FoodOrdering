@@ -1,9 +1,9 @@
 <?php
-
 session_start();
 if(!isset($_SESSION["uid"])){
 	header("location:index.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,14 +17,12 @@ if(!isset($_SESSION["uid"])){
         crossorigin="anonymous">
 		<script src="js/jquery2.js"></script>
 		<script src="main.js"></script>
-		<style>
-			
-		</style>
+		
 	</head>
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
 		<div class="container">	
-				<a href="#" class="navbar-brand">ExpressOrder</a>
+				<a href="resturant.php" class="navbar-brand">ExpressOrder</a>
 			<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,7 +39,7 @@ if(!isset($_SESSION["uid"])){
 				</li>
 			</ul>
 			
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav navbar-right">
                         <li class="nav-item mr-3">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#cart_container">
                                 <i class="fas fa-cart-plus"></i> Cart<span class="badge bg-primary">0</span>
@@ -59,7 +57,7 @@ if(!isset($_SESSION["uid"])){
                                     <i class="fas fa-cog"></i> change password
                                 </a>
 								<a href="account.php" class="dropdown-item">
-                                    <i class="fas fa-cog"></i> account
+                                    <i class="fas fa-user"></i> account
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="logout.php" class="dropdown-item">
@@ -76,7 +74,7 @@ if(!isset($_SESSION["uid"])){
 	<p><br/></p>
 	<p><br/></p>
 	<div class="row">
-	<div class="col-md-3">
+	<div class="col-3">
 	</div>
 	<div class="col-md-4">
 			<div class="input-group mb-3">
@@ -85,7 +83,7 @@ if(!isset($_SESSION["uid"])){
 				<button type="submit" class="btn btn-outline-secondary" id="search_btn"><span class="fa fa-search"></span></button>
 			    </div>
 			 </div>
-    
+    </div>
 	<div class="col-md-5">
 
 	</div>
@@ -94,60 +92,33 @@ if(!isset($_SESSION["uid"])){
 		<div class="row">
 			<div class="col-md-3">
 				<div id="get_category">
-				</div>
-				<!--<div class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#"><h4>Categories</h4></a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Categories</a></li>
-				</div> -->
-				<div id="get_brand">
-				</div>
-				<!--<div class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#"><h4>Brand</h4></a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Categories</a></li>
-					<li><a href="#">Categories</a></li>
-				</div> -->
+				</div>	
 			</div>
-			<div class="col-md-9">	
+			<div class="col-md-9 col-xs-12">	
 				<div class="row">
-					<div class="col-md-12 col-xs-12" id="product_msg">
-					</div>
+			<!--		<div class="col-md-12 col-xs-12" id="product_msg">
+					</div>-->
 				</div>
-				<div class="card" id="scroll">
+				<div class="card">
 					<div class="card-header">Products</div>
 					<div class="card-body">
-						<div id="get_product">
-							<!--Here we get product jquery Ajax Request-->
-						</div>
-						<!--<div class="col-md-4">
-							<div class="panel panel-info">
-								<div class="panel-heading">Samsung Galaxy</div>
-								<div class="panel-body">
-									<img src="product_images/images.JPG"/>
-								</div>
-								<div class="panel-heading">₦.500.00
-									<button style="float:right;" class="btn btn-danger btn-xs">AddToCart</button>
-								</div>
-							</div>
-						</div> -->
+					<?php include "cat.php"; ?>
 					</div>
 					<div class="card-footer">&copy; 2018</div>
 				</div>
 			</div>	
 		</div>
-		<div class="row mt-4">
-			<div class="col-md-9">
-				</div>
-				<div class="col-md-3">
+		<div class="row">
+		<div class="col-md-4">
+		</div>
+			<div class="col-md-8">
+				
 					<ul class="pagination" id="pageno">
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item bg-primary"><a class="page-link" href="#">1</a></li>
 					</ul>
-				</div>
+				
 			</div>
+		</div>
 		</div>
 	</div>
 
@@ -189,51 +160,3 @@ if(!isset($_SESSION["uid"])){
         crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -28,10 +28,11 @@ if(isset($_POST["page"])){
 	$pageno = ceil($count/9);
 	for($i=1;$i<=$pageno;$i++){
 		echo "
-			<li class='page-link'><a class='page-link' href='#' page='$i' id='page'>$i</a></li>
+			<li><a href='#' page='$i' id='page'>$i</a></li>
 		";
 	}
 }
+
 if(isset($_POST["getProduct"])){
 	$limit = 9;
 	if(isset($_POST["setPage"])){
@@ -50,35 +51,24 @@ if(isset($_POST["getProduct"])){
 			$pro_desc  = $row['product_desc'];
 			$pro_price = $row['product_price'];
 			$pro_image = $row['product_image'];
+			
 			echo "
-				<div class='col-md-12'>
-							<div class='card  mb-resp mb-3'>
-								<div class='card-header text-primary'>$pro_title</div>
-								<div class='card-body'>
-								<div class='row'>
-								     <div class='col-md-4'>
-									<img class='img-fluid' src='adminarea/products/$pro_image'/>
-									</div>
-									<div class='col-md-8 text-right text-primary'>
-									<p >$pro_desc</p>
-									</div>
-								</div>	
-							</div>
-							<div class='card-footer'>
-							<div class='row'>
-							<div class='col-lg-8 col-md-6 col-sm-4'>
-							</div>
-							<div class='col-lg-2 col-md-3 col-sm-4'>
-							<h5 class='card-text pt-2 mr-3'>₦.$pro_price.00
-							</h5>
-							</div> 
-							<div class='col-lg-2 col-md-3 col-sm-4'>
-							<button pid='$pro_id' id='product' class='btn btn-success btn-xs '>AddToCart</button>
-							</div>
-							</div>
-							</div>
-							</div>
-						</div>	
+				<div class='col-md-4 col-sm-4'>
+					<div class='card mb-resp mb-3'>
+						<div class='card-header text-primary'>$pro_title</div>
+						<div class='card-body'>	     
+							<img class='img-fluid' src='adminarea/products/$pro_image' style='height:250px; width:260px;'/>			
+					</div>
+					<div class='card-footer'>
+					<span class='row justify-content-end'>
+					<h5 class='card-text pt-2 mr-3'>₦.$pro_price.00
+					</h5>
+					<button pid='$pro_id' id='product' class='btn btn-success btn-xs'>AddToCart</button>
+					</span>
+					</div>
+					</div>
+					</div>
+				</div>	
 			";
 		}
 	}
@@ -101,30 +91,18 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 			$pro_image = $row['product_image'];
 	     	$pro_desc = $row['product_desc'];
 		echo "
-				<div class='col-md-12'>
+					<div class='col-md-4'>
 							<div class='card  mb-resp mb-3'>
 								<div class='card-header text-primary'>$pro_title</div>
-								<div class='card-body'>
-								<div class='row'>
-								     <div class='col-md-4'>
-									<img class='img-fluid' src='adminarea/products/$pro_image'/>
-									</div>
-									<div class='col-md-8 text-right text-primary'>
-									<p >$pro_desc</p>
-									</div>
-								</div>	
+								<div class='card-body'>	     
+									<img class='img-fluid' src='adminarea/products/$pro_image' style='height:250px; width:260px;'/>			
 							</div>
 							<div class='card-footer'>
-							<div class='row'>
-							<div class='col-lg-8 col-md-6 col-sm-4'>
-							</div>
-							<div class='col-lg-2 col-md-3 col-sm-4'>
+							<span class='row justify-content-end'>
 							<h5 class='card-text pt-2 mr-3'>₦.$pro_price.00
 							</h5>
-							</div> 
-							<div class='col-lg-2 col-md-3 col-sm-4'>
-							<button pid='$pro_id' id='product' class='btn btn-success btn-xs '>AddToCart</button>
-							</div>
+							<button pid='$pro_id' id='product' class='btn btn-success btn-xs'>AddToCart</button>
+							</span>
 							</div>
 							</div>
 							</div>
