@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2018 at 02:29 PM
+-- Generation Time: Oct 05, 2018 at 12:54 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -53,21 +53,9 @@ CREATE TABLE `cart` (
   `p_id` int(10) NOT NULL,
   `ip_add` varchar(250) NOT NULL,
   `user_id` int(10) DEFAULT NULL,
-  `qty` int(10) NOT NULL
+  `qty` int(10) NOT NULL,
+  `uniq_id` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `qty`) VALUES
-(17, 10, '::1', 3, 1),
-(20, 2, '::1', 3, 4),
-(21, 5, '::1', 3, 1),
-(22, 6, '::1', 3, 1),
-(23, 9, '::1', 1, 1),
-(24, 11, '::1', 1, 1),
-(25, 8, '::1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -100,18 +88,27 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `product_title` varchar(200) NOT NULL,
+  `product_price` varchar(200) NOT NULL,
   `qty` int(11) NOT NULL,
-  `trx_id` varchar(255) NOT NULL,
-  `p_status` varchar(20) NOT NULL
+  `trx_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `qty`, `trx_id`, `p_status`) VALUES
-(1, 2, 7, 1, '07M47684BS5725041', 'Completed'),
-(2, 2, 2, 1, '07M47684BS5725041', 'Completed');
+INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `product_title`, `product_price`, `qty`, `trx_id`) VALUES
+(38, 6, 1, 'coca-cola', '200', 1, '5bb686919ae30'),
+(39, 6, 2, 'Maltina', '250', 1, '5bb686919ae30'),
+(40, 6, 1, 'coca-cola', '200', 1, '5bb687ea42635'),
+(41, 6, 2, 'Maltina', '250', 1, '5bb687ea42635'),
+(42, 6, 6, 'Fanta', '200', 1, '5bb688d63ec52'),
+(43, 6, 5, 'Amala', '300', 1, '5bb688d63ec52'),
+(44, 6, 1, 'coca-cola', '200', 1, '5bb69647f3344'),
+(45, 6, 2, 'Maltina', '250', 1, '5bb69647f3344'),
+(46, 6, 3, 'Jollof Rice', '1000', 1, '5bb69647f3344'),
+(47, 6, 4, 'Fried Rice', '1300', 1, '5bb69647f3344');
 
 -- --------------------------------------------------------
 
@@ -192,7 +189,9 @@ CREATE TABLE `user_info` (
 
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `access`, `password`, `mobile`, `address1`) VALUES
 (3, 'tayo', 'uthman', 'uthmanayinde6@gmail.com', 'Staff', '350b38d33501f502775dd6ac5c06fe7a', 'iwo-road, ', ' iwo-road, olojo,olodo, ibadan'),
-(4, 'bolu', 'odetayo', 'bolu@gmail.com', 'Student', 'b161cf37cdff9f632bc8d310876be2da', '0902374647', 'ibadan');
+(4, 'bolu', 'odetayo', 'bolu@gmail.com', 'Student', 'b161cf37cdff9f632bc8d310876be2da', '0902374647', 'ibadan'),
+(5, 'ayinde', 'odetayo', 'uth@gmail.com', 'Student', '8e5fda446d61535d6b9372c6a17d7331', '0902374647', 'ibadan'),
+(6, 'olaiya', 'posi', 'posi@gmail.com', 'Student', '61e6fca519f16135f234a3e5bab575b0', '0902374647', 'ibadan');
 
 --
 -- Indexes for dumped tables
@@ -248,13 +247,13 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -266,7 +265,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -278,13 +277,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

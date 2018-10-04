@@ -4,6 +4,8 @@ if(!isset($_SESSION["uid"])){
 	header("location:index.php");
 }
 
+				
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +52,7 @@ if(!isset($_SESSION["uid"])){
                                 <i class="fas fa-user"></i>  <?php echo "Hi," . $_SESSION["name"]; ?>
                             </a>
                             <div class="dropdown-menu">
-                                <a href="account.php" class="dropdown-item">
+                                <a href="customer_order.php" class="dropdown-item">
                                     <i class="fas fa-user-circle"></i> order
                                 </a>
                                 <a href="change_password.php" class="dropdown-item">
@@ -147,7 +149,11 @@ if(!isset($_SESSION["uid"])){
 									<div class="col-md-3">Price in $.</div>
 								</div>-->
 						</div>
+					
 						<div class="panel-footer"></div>
+						
+						<br>
+						
                       </div>
                       <hr>
                     </div>

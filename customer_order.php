@@ -1,9 +1,49 @@
 <?php
-
 session_start();
 if (!isset($_SESSION["uid"])) {
 	header("location:index.php");
 }
+?>
+
+<?php
+include_once("db.php");
+
+if (isset($_GET['cart_id'])) {
+    $tranx_id = $_GET['cart_id'];
+    $sql = $con->query("SELECT * FROM cart WHERE uniq_id = '$tranx_id'");
+    while ($row = mysqli_fetch_array($sql)) {
+    $product_id[] = $row['p_id'];
+    $quantity[] = $row['qty'];
+    $user_id = $row['user_id'];
+    }
+    for ($i = 0; $i < count($product_id); $i++) {
+        $sql1 = $con->query("SELECT * FROM products WHERE product_id = $product_id[$i]");
+        while ($row = mysqli_fetch_array($sql1)) {
+            $name[] = $row['product_title'];
+            $price[] = $row['product_price'];
+        }
+        
+    }
+
+    for ($i = 0; $i < count($product_id); $i++) {
+        
+        $sql2 = "INSERT INTO `orders` (`user_id`, `product_id`,`product_title`,`product_price`,`qty`,`trx_id`) VALUES ('$user_id','".$product_id[$i]."','".$name[$i]."','".$price[$i]."','".$quantity[$i]."','$tranx_id')";
+        if (mysqli_query($con, $sql2)) {
+            $sql3 = "DELETE FROM cart WHERE uniq_id = '$tranx_id'";
+            mysqli_query($con, $sql3);
+            header("Location: order_success.php");
+            unset($_SESSION['cart_id']);
+           
+        } 
+    }
+   
+
+}    
+    
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +51,7 @@ if (!isset($_SESSION["uid"])) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>ExpressOrder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
@@ -25,7 +65,7 @@ if (!isset($_SESSION["uid"])) {
 table tr td {padding:10px;}
 </style>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container">
             <a href="resturant.php" class="navbar-brand">ExpressOrder</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -45,14 +85,13 @@ table tr td {padding:10px;}
                             </div>
                         </li>
                 </ul>
-                
             </div>
         </div>
     </nav>
 
 
     <header id="main-header" class="py-5 mt-1 bg-primary text-white">
-        <div class="home-inner container">
+        <div class="home-inner rower">
             <div class="row">
                 <div class="col-md-6 mt-3">
                     <p class="display-3">Recent Order</p>
@@ -73,25 +112,36 @@ table tr td {padding:10px;}
                     </ul>
                 </div>
                 <div class="col-md-8">
+                <div class="col-md-12" id="signup_msg">
+                   <?php
+                    if (isset($error)) {
+                        echo "
+			<div class='alert alert-warning'>
+				<div  class='close' data-dismiss='alert' aria-label='close'>&times;</div>
+				<b>" . $msg . "</b>
+			</div>
+		";
+                    }
+                    ?>
+                </div>
                     <?php
 					include_once("db.php");
 					$user_id = $_SESSION["uid"];
-					$orders_list = "SELECT o.order_id,o.user_id,o.product_id,o.qty,o.trx_id,o.p_status,p.product_title,p.product_price,p.product_image FROM orders o,products p WHERE o.user_id='$user_id' AND o.product_id=p.product_id";
+					$orders_list = "SELECT * FROM orders WHERE user_id = '$user_id' ";
 					$query = mysqli_query($con, $orders_list);
 					if (mysqli_num_rows($query) > 0) {
 						while ($row = mysqli_fetch_array($query)) {
 							?>
 										<div class="row">
-											<div class="col-md-6">
-												<img style="float:right;" src="product_images/<?php echo $row['product_image']; ?>" class="img-responsive img-thumbnail"/>
-											</div>
+											
 											<div class="col-md-6">
 												<table>
 													<tr><td>Product Name</td><td><b><?php echo $row["product_title"]; ?></b> </td></tr>
-													<tr><td>Product Price</td><td><b><?php echo "$ " . $row["product_price"]; ?></b></td></tr>
+													<tr><td>Product Price</td><td><b><?php echo "₦ " . $row["product_price"]; ?></b></td></tr>
 													<tr><td>Quantity</td><td><b><?php echo $row["qty"]; ?></b></td></tr>
 													<tr><td>Transaction Id</td><td><b><?php echo $row["trx_id"]; ?></b></td></tr>
 												</table>
+                                                <hr>
 											</div>
 										</div>
 									<?php
@@ -106,7 +156,7 @@ table tr td {padding:10px;}
 
     <!-- FOOTER -->
     <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
-        <div class="container">
+        <div class="rower">
             <div class="row">
                 <div class="col">
                     <p class="lead text-center">
@@ -125,3 +175,4 @@ table tr td {padding:10px;}
 </body>
 
 </html>
+	

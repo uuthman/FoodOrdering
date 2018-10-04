@@ -169,9 +169,11 @@ $count = $stmt->rowCount();
               <thead class="thead-dark">
                 <tr>
                   <th>#</th>
-                  <th>product id</th>
+                  <th>product name</th>
+                  <th>product price</th>
+                  <th>quantity</th>
                   <th>transaction id</th>
-                  <th>status</th>
+                  
                 </tr>
               </thead>
               <?php
@@ -179,10 +181,12 @@ $count = $stmt->rowCount();
               echo '<tbody>
                 <tr>
                   <td>' . $order['order_id'] . '</td>
-                  <td>'. $order['product_id'] . '</td>
+                  <td>' . $order['product_title'] . '</td>
+                  <td>' . $order['product_price'] . '</td>
+                  <td>' . $order['qty'] . '</td>
                   <td>' . $order['trx_id'] . '</td>
-                  <td>' . $order['p_status'] . '</td>
-                  <td>
+                 
+                 
                 </tr>
               </tbody>';
               }

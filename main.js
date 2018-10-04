@@ -170,6 +170,10 @@ $(document).ready(function(){
 			}
 		})
 	})
+
+	
+
+
 	//Add Product into Cart End Here
 	//Count user cart items funtion
 	count_item();
@@ -185,7 +189,7 @@ $(document).ready(function(){
 	}
 	//Count user cart items funtion end
 
-	//Fetch Cart item from Database to dropdown menu
+	//Fetch Cart item from Database to modal
 	getCartItem();
 	function getCartItem(){
 		$.ajax({
@@ -198,7 +202,7 @@ $(document).ready(function(){
 		})
 	}
 
-	//Fetch Cart item from Database to dropdown menu
+	//Fetch Cart item from Database to modal
 
 	/*
 		Whenever user change qty we will immediate update their total amount by using keyup funtion

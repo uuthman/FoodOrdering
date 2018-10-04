@@ -113,17 +113,16 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 		}
 	}
 	
-
-
+	
+   
 	if(isset($_POST["addToCart"])){
 		
-
 		$p_id = $_POST["proId"];
-		
-
 		if(isset($_SESSION["uid"])){
-
+			
 		$user_id = $_SESSION["uid"];
+		
+	
 
 		$sql = "SELECT * FROM cart WHERE p_id = '$p_id' AND user_id = '$user_id'";
 		$run_query = mysqli_query($con,$sql);
@@ -136,9 +135,14 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 				</div>
 			";
 		} else {
+
+			if(isset($_SESSION['cart_id'])&& $_SESSION['cart_id'] != ""){
+           		$cart_u_id = $_SESSION['cart_id'];
+			}else{$cart_u_id = $_SESSION['cart_id'] = uniqid();}
+			
 			$sql = "INSERT INTO `cart`
-			(`p_id`, `ip_add`, `user_id`, `qty`) 
-			VALUES ('$p_id','$ip_add','$user_id','1')";
+			(`p_id`, `ip_add`, `user_id`, `qty`,`uniq_id`) 
+			VALUES ('$p_id','$ip_add','$user_id','1','$cart_u_id')";
 			if(mysqli_query($con,$sql)){
 				echo "
 					<div class='alert alert-success'>
@@ -159,6 +163,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 					</div>";
 					exit();
 			}
+			
 			$sql = "INSERT INTO `cart`
 			(`p_id`, `ip_add`, `user_id`, `qty`) 
 			VALUES ('$p_id','$ip_add','-1','1')";
@@ -194,58 +199,52 @@ if (isset($_POST["count_item"])) {
 	echo $row["count_item"];
 	exit();
 }
-//Count User cart item
-
 //Get Cart Item From Database to Dropdown menu
 if (isset($_POST["Common"])) {
 
-	if (isset($_SESSION["uid"])) {
+//Get Cart Item From Database to Dropdown menu
+if (isset($_SESSION["uid"])) {
 		//When user is logged in this query will execute
-		$sql = "SELECT a.product_id,a.product_title,a.product_price,a.product_image,b.id,b.qty FROM products a,cart b WHERE a.product_id=b.p_id AND b.user_id='$_SESSION[uid]'";
-	}else{
+	$sql = "SELECT a.product_id,a.product_title,a.product_price,a.product_image,b.id,b.qty,b.uniq_id FROM products a,cart b WHERE a.product_id=b.p_id AND b.user_id='$_SESSION[uid]'";
+} else {
 		//When user is not logged in this query will execute
-		$sql = "SELECT a.product_id,a.product_title,a.product_price,a.product_image,b.id,b.qty FROM products a,cart b WHERE a.product_id=b.p_id AND b.ip_add='$ip_add' AND b.user_id < 0";
-	}
-	$query = mysqli_query($con,$sql);
-	if (isset($_POST["getCartItem"])) {
+	$sql = "SELECT a.product_id,a.product_title,a.product_price,a.product_image,b.id,b.qty,b.uniq_id FROM products a,cart b WHERE a.product_id=b.p_id AND b.ip_add='$ip_add' AND b.user_id < 0";
+}
+$query = mysqli_query($con, $sql);
+if (isset($_POST["getCartItem"])) {
 		//display cart item in dropdown menu
-		if (mysqli_num_rows($query) > 0) {
-			$n=0;
-			while ($row=mysqli_fetch_array($query)) {
-				$n++;
-				$product_id = $row["product_id"];
-				$product_title = $row["product_title"];
-				$product_price = $row["product_price"];
-				$product_image = $row["product_image"];
-				$cart_item_id = $row["id"];
-				$qty = $row["qty"];
+	if (mysqli_num_rows($query) > 0) {
+		$n = 0;
+		while ($row = mysqli_fetch_array($query)) {
+			$n++;
+			$product_id = $row["product_id"];
+			$product_title = $row["product_title"];
+			$product_price = $row["product_price"];
+			$cart_item_id = $row["id"];
+			$qty = $row["qty"];
+					
 				echo '
 					<div class="row">
 						<div class="col-md-4">'.$n.'</div>
 						<div class="col-md-4">'.$product_title. '</div>
 						<div class="col-md-4">₦'.$product_price. '</div>
+						
 					</div>
 					<br>
 					';
 					
 
-
-				// echo '
-				//    <div class="col-4">
-				//    <div class="text-left">'. $n . '</div>
-				//    <div class="align-top">'. $product_title . '</div>
-				//    </div>
-				//    <div class="col-4 text-right right-cart">
-				//    <h6>₦'.$product_price.'</h6>
-				// ';
-				
 			}
-			?>
-				<a  href="cart.php" class="btn btn-warning btn-block">Checkout</a>
+			
+			?>  		
+				<a  href="cart.php"  class="btn btn-warning btn-block">Checkout</a>
+					
 			<?php
 			exit();
 		}
-	}
+
+}
+	
 	if (isset($_POST["checkOutDetails"])) {
 		if (mysqli_num_rows($query) > 0) {
 			//display user cart item with "Ready to checkout" button if user is not login
@@ -258,12 +257,13 @@ if (isset($_POST["Common"])) {
 					$product_price = $row["product_price"];
 					$cart_item_id = $row["id"];
 					$qty = $row["qty"];
-
+	         		$unik_id = $row["uniq_id"];
+					
 					echo 
 						'<div class="row">
 								
 								<input type="hidden" name="product_id[]" value="'.$product_id.'"/>
-								<input type="hidden" name="" value="'.$cart_item_id.'"/>
+								<input type="hidden" name="cart" value="'.$cart_item_id.'"/>
 								<div class="col-md-2">'.$product_title.'</div>
 								<div class="col-md-2"><input type="text" class="form-control qty" value="'.$qty.'" ></div>
 								<div class="col-md-2"><input type="text" class="form-control price" value="'.$product_price.'" readonly="readonly"></div>
@@ -279,48 +279,29 @@ if (isset($_POST["Common"])) {
 							';
 				}
 				
+				
 				echo '<div class="row mt-4">
 							<div class="col-md-8"></div>
 							<div class="col-md-4 ">
 								<b class="net_total" style="font-size:20px;"> </b>
 					</div>';
 				if (!isset($_SESSION["uid"])) {
-					echo '<input type="submit" style="float:right;" name="login_user_with_product" class="btn btn-info btn-lg" value="Ready to Checkout" >
+					echo '<input type="submit" style="float:right;" name="login_user_with_product" class="btn btn-info btn-lg" value="Place Order" >
 							</form>';
 					
 				}else if(isset($_SESSION["uid"])){
-					//Paypal checkout form
 					echo '
-						</form>
-						<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-							<input type="hidden" name="cmd" value="_cart">
-							<input type="hidden" name="business" value="shoppingcart@khanstore.com">
-							<input type="hidden" name="upload" value="1">';
-							  
-							$x=0;
-							$sql = "SELECT a.product_id,a.product_title,a.product_price,a.product_image,b.id,b.qty FROM products a,cart b WHERE a.product_id=b.p_id AND b.user_id='$_SESSION[uid]'";
-							$query = mysqli_query($con,$sql);
-							while($row=mysqli_fetch_array($query)){
-								$x++;
-								echo  	
-									'<input type="hidden" name="item_name_'.$x.'" value="'.$row["product_title"].'">
-								  	 <input type="hidden" name="item_number_'.$x.'" value="'.$x.'">
-								     <input type="hidden" name="amount_'.$x.'" value="'.$row["product_price"].'">
-								     <input type="hidden" name="quantity_'.$x.'" value="'.$row["qty"].'">';
-								}
-							  
-							echo   
-								'<input type="hidden" name="return" value="http://localhost/open/payment_success.php"/>
-					                <input type="hidden" name="notify_url" value="http://localhost/open/payment_success.php">
-									<input type="hidden" name="cancel_return" value="http://localhost/open/cancel.php"/>
-									<input type="hidden" name="currency_code" value="NAIRA"/>
-									<input type="hidden" name="custom" value="'.$_SESSION["uid"].'"/>
-									<input style="float:right;margin-right:80px;" type="image" name="submit"
-										src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-rect-paypalcheckout-60px.png" alt="PayPal Checkout"
-										alt="PayPal - The safer, easier way to pay online">
-								</form>';
-				}
-			}
+					</form>
+					<form method="post" action="customer_order.php?cart_id='.$unik_id.'">
+					<input type="submit" style="float:right;" class="btn btn-info btn-lg" name="place_order" value="Place Order" >
+					<form>
+					';
+
+
+			       			
+		}
+		} 
+			
 	}
 	
 	

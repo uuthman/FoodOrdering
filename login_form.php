@@ -27,7 +27,7 @@ if (isset($_POST["login_user_with_product"])) {
     crossorigin="anonymous">
   <script src="js/jquery2.js"></script>
   
-  <title>Login</title>
+  <title>ExpressOrder</title>
 </head>
 
 <body>

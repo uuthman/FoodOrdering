@@ -46,8 +46,15 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8" id="cart_msg">
 				<!--Cart Message--> 
+				
 			</div>
 			<div class="col-md-2"></div>
+		</div>
+		<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<h6 class="mute text-danger">NOTE: please always update when you change the quanity by pressing the blue mark</h6>
+		</div>
 		</div>
 		<div class="row">
 			<div class="col-md-2"></div>
